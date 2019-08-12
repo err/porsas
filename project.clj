@@ -8,8 +8,10 @@
             :comments "same as Clojure"}
   :scm {:name "git"
         :url "https://github.com/metosin/porsas"}
-  :dependencies [[org.postgresql/postgresql "42.2.6"]
-                 [io.reactiverse/reactive-pg-client "0.11.4"]]
+  :dependencies [[mysql/mysql-connector-java "5.1.42"]
+                 [org.postgresql/postgresql "42.2.6"]
+                 #_[io.reactiverse/reactive-pg-client "0.11.4"]
+                 [io.vertx/vertx-mysql-client "3.8.1-SNAPSHOT"]]
   :profiles {:dev {:global-vars {*warn-on-reflection* true}
                    :dependencies [[org.clojure/clojure "1.10.1"]
                                   [com.clojure-goes-fast/clj-async-profiler "0.4.0"]
@@ -23,6 +25,8 @@
              :perf {:jvm-opts ^:replace ["-server"
                                          "-Xmx4096m"
                                          "-Dclojure.compiler.direct-linking=true"]}}
+
+  :repositories [["vertx-snapshots" {:url "https://oss.sonatype.org/content/repositories/snapshots/"}]]
   :aliases {"all" ["with-profile" "dev"]
             "perf" ["with-profile" "default,dev,perf"]
             "test-clj" ["all" "do" ["test"] ["check"]]})
